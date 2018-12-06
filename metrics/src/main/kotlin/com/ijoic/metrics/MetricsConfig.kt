@@ -45,7 +45,7 @@ object MetricsConfig {
    */
   private object DefaultMetricsHandler: MetricsHandler {
     override fun dispatchStatReceived(message: MetricsMessage, delay: Long) {
-      println("message - $message, delay - $delay ms")
+      println("delay: [${message.javaClass.canonicalName}] $delay ms")
     }
   }
 }
