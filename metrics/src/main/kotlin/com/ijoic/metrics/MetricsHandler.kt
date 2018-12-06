@@ -24,7 +24,7 @@ package com.ijoic.metrics
  */
 interface MetricsHandler {
   /**
-   * Dispatch metrics delay with [message] and [delay]
+   * Dispatch status received with [message] and [delay]
    */
-  fun dispatchMetricsDelay(message: MetricsMessage, delay: Long)
+  fun dispatchStatReceived(message: MetricsMessage, delay: Long)
 }

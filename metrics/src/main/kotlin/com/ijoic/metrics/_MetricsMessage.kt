@@ -18,18 +18,35 @@
 package com.ijoic.metrics
 
 /**
- * Trace delay status of current messages
+ * Trace status send of current messages
  *
- * @author verstsiu created at 2018-12-06 18:30
+ * @author verstsiu created at 2018-12-06 21:02
  */
-fun MetricsMessage.traceDelay() {
+fun MetricsMessage.statSend() {
   val message = this
 
   with(MetricsConfig) {
     if (!traceEnabled) {
       return
     }
-    val delay = currentTimeMs() - message.msgCreateTime
-    handler.dispatchMetricsDelay(message, delay)
+
+    message.lastMsgSendTime = currentTimeMs()
+  }
+}
+
+/**
+ * Trace status received of current messages
+ *
+ * @author verstsiu created at 2018-12-06 18:30
+ */
+fun MetricsMessage.statReceived() {
+  val message = this
+
+  with(MetricsConfig) {
+    if (!traceEnabled) {
+      return
+    }
+    val delay = currentTimeMs() - message.lastMsgSendTime
+    handler.dispatchStatReceived(message, delay)
   }
 }

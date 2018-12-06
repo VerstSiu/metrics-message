@@ -1,12 +1,19 @@
 package sample.ijoic.metrics
 
-import com.ijoic.metrics.BaseMetricsMessage
-import com.ijoic.metrics.traceDelay
+import com.ijoic.metrics.MetricsConfig
+import com.ijoic.metrics.MetricsMessage
+import com.ijoic.metrics.statReceived
+import com.ijoic.metrics.statSend
 
 fun main() {
-  val message = BaseMetricsMessage()
+  MetricsConfig.traceEnabled = true
+
+  val message = MetricsMessage()
 
   Thread.sleep(1000)
+  message.statReceived()
 
-  message.traceDelay()
+  message.statSend()
+  Thread.sleep(2000)
+  message.statReceived()
 }

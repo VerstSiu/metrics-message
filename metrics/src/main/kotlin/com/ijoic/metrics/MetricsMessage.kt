@@ -20,11 +20,11 @@ package com.ijoic.metrics
 /**
  * Metrics message
  *
- * @author verstsiu created at 2018-12-06 18:14
+ * @author verstsiu created at 2018-12-06 18:21
  */
-interface MetricsMessage {
+open class MetricsMessage {
   /**
-   * Message create time
+   * Last message send time
    */
-  val msgCreateTime: Long
+  internal var lastMsgSendTime = MetricsConfig.currentTimeMs()
 }
