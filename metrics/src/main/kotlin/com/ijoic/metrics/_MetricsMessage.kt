@@ -23,6 +23,13 @@ package com.ijoic.metrics
  * @author verstsiu created at 2018-12-06 18:30
  */
 fun MetricsMessage.traceDelay() {
-  val delay = MetricsConfig.currentTimeMs() - msgCreateTime
-  MetricsConfig.handler.dispatchMetricsDelay(this, delay)
+  val message = this
+
+  with(MetricsConfig) {
+    if (!traceEnabled) {
+      return
+    }
+    val delay = currentTimeMs() - message.msgCreateTime
+    handler.dispatchMetricsDelay(message, delay)
+  }
 }

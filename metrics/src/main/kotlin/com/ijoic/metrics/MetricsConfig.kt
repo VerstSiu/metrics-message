@@ -31,6 +31,11 @@ object MetricsConfig {
   }
 
   /**
+   * Trace enabled status
+   */
+  var traceEnabled: Boolean = false
+
+  /**
    * Metrics handler
    */
   var handler: MetricsHandler = DefaultMetricsHandler
