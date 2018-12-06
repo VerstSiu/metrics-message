@@ -22,16 +22,15 @@ package com.ijoic.metrics
  *
  * @author verstsiu created at 2018-12-06 21:02
  */
-fun MetricsMessage.statSend() {
+fun <T: MetricsMessage> T.statSend(): T {
   val message = this
 
   with(MetricsConfig) {
-    if (!traceEnabled) {
-      return
+    if (traceEnabled) {
+      message.lastMsgSendTime = currentTimeMs()
     }
-
-    message.lastMsgSendTime = currentTimeMs()
   }
+  return this
 }
 
 /**
@@ -39,14 +38,14 @@ fun MetricsMessage.statSend() {
  *
  * @author verstsiu created at 2018-12-06 18:30
  */
-fun MetricsMessage.statReceived() {
+fun <T: MetricsMessage> T.statReceived(): T {
   val message = this
 
   with(MetricsConfig) {
-    if (!traceEnabled) {
-      return
+    if (traceEnabled) {
+      val delay = currentTimeMs() - message.lastMsgSendTime
+      handler.dispatchStatReceived(message, delay)
     }
-    val delay = currentTimeMs() - message.lastMsgSendTime
-    handler.dispatchStatReceived(message, delay)
   }
+  return this
 }
