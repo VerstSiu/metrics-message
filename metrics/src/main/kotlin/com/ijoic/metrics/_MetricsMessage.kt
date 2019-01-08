@@ -49,3 +49,11 @@ fun <T: MetricsMessage> T.statReceived(): T {
   }
   return this
 }
+
+/**
+ * Returns metrics delay milliseconds of current message
+ *
+ * @author verstsiu created at 2019-01-08 17:55
+ */
+val <T: MetricsMessage> T.metricsDelayMs
+  get() = MetricsConfig.currentTimeMs() - lastMsgSendTime
